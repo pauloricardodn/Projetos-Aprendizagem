@@ -1,0 +1,10 @@
+C:\Users\Paulo\documents\visual studio 2015\Projects\SMN.Musicas\SMN.Comum.Entity\bin\Debug\SMN.Comum.Entity.dll.config
+C:\Users\Paulo\documents\visual studio 2015\Projects\SMN.Musicas\SMN.Comum.Entity\bin\Debug\SMN.Comum.Entity.dll
+C:\Users\Paulo\documents\visual studio 2015\Projects\SMN.Musicas\SMN.Comum.Entity\bin\Debug\SMN.Comum.Entity.pdb
+C:\Users\Paulo\documents\visual studio 2015\Projects\SMN.Musicas\SMN.Comum.Entity\bin\Debug\EntityFramework.dll
+C:\Users\Paulo\documents\visual studio 2015\Projects\SMN.Musicas\SMN.Comum.Entity\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Paulo\documents\visual studio 2015\Projects\SMN.Musicas\SMN.Comum.Entity\bin\Debug\EntityFramework.xml
+C:\Users\Paulo\documents\visual studio 2015\Projects\SMN.Musicas\SMN.Comum.Entity\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Paulo\documents\visual studio 2015\Projects\SMN.Musicas\SMN.Comum.Entity\obj\Debug\SMN.Comum.Entity.dll
+C:\Users\Paulo\documents\visual studio 2015\Projects\SMN.Musicas\SMN.Comum.Entity\obj\Debug\SMN.Comum.Entity.pdb
+C:\Users\Paulo\documents\visual studio 2015\Projects\SMN.Musicas\SMN.Comum.Entity\obj\Debug\SMN.Comum.Entity.csprojResolveAssemblyReference.cache

@@ -1,0 +1,112 @@
+﻿@model Administracao.Web.ViewModel.Venda.VendaViewModel
+@{
+    Layout = null;
+}
+
+<h1>Venda</h1>
+<table class="table table-striped">
+    <tr>
+
+        <th>
+            Código
+        </th>
+        <th>
+            Cliente
+        </th>
+        <th>
+            Data da Venda
+        </th>
+        <th>
+            Valor Total
+        </th>
+
+    </tr>
+
+    
+        <tr>
+            <td>
+                @Model.IdVenda
+            </td>
+            <td>
+                @Model.Cliente.Nome
+            </td>
+            <td>
+                @Model.DataVenda
+            </td>
+            <td>
+                <b>R$   @Model.ValorTotalVenda </b>
+            </td>            
+        </tr>
+    
+</table>
+
+    <table class="table table-striped" >
+        <tr class="titulo">
+            <th>Codigo</th>
+            <th>Nome</th>
+            <th>Quantidade</th>
+            <th>Valor Uni</th>
+            <th>Valor Total</th>
+        </tr>
+
+
+        @foreach (var item in Model.VendaItem)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(ModelItem => item.Produto.IdProduto)
+                </td>
+                <td>
+                    @Html.DisplayFor(ModelItem => item.Produto.NomeProduto)
+                </td>
+                <td>
+                    @Html.DisplayFor(ModelItem => item.Qtd)
+                </td>
+                <td>
+                    @Html.DisplayFor(ModelItem => item.ValorUnitario)
+                </td>
+                <td>
+                    @Html.DisplayFor(ModelItem => item.ValorTotalItem)
+                </td>
+            </tr>
+
+        }
+    </table>
+    <button type="button" class="btn btn-default pull-right" href='@Url.Action("Exibir", "Venda")' >Cancelar </button>
+    <button type="button" class="btn btn-primary pull-right" onclick="editar(@Model.IdVenda)">Editar </button>
+
+
+   <script language="javascript">
+
+         function editar(id) {
+             var url = '@Url.Action("EditarVenda", "Venda")';
+             console.log(id);
+                    $.get(url,
+                    {
+                        id: id
+                    }).done(function (data) {
+                        console.log(data);
+                        $("#divDetalhes").slideUp(200, function () {
+                            $("#divEditar").html(data).slideDown(200);
+                    });
+                    }).error(function () {
+                        alert("erro ao editar");
+                    });
+         };
+       function cancelar() {
+           var url = '@Url.Action("Exibir", "Venda")';
+           $.get(url, null
+               ).done(function (data) {
+                   //$("#divDetalhes").slideUp(200, function () {
+                   //    $("#divVenda").html(data).slideDown(200);
+
+               }).error(function () {
+                   alert("erro");
+               });
+       
+
+       };
+
+</script>
+
+

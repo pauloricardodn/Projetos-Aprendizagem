@@ -1,0 +1,26 @@
+﻿<div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+    @Html.ActionLink("DIscoteca", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+</div>
+<div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink("Musicas", "Index", "Musicas")</li>
+        <li>@Html.ActionLink("Albuns", "Index", "Albums")</li>
+        <li>@Html.ActionLink("About", "About", "Home")</li>
+        @if (Request.IsAuthenticated)
+        {
+            <li>@Html.ActionLink("Fazer Logof   " + User.Identity.Name + "  ", "Logoff", "Usuarios")</li>
+        }
+        else
+        {
+            <li>@Html.ActionLink("fazer Login", "Login", "Usuarios")</li>
+
+        }
+    </ul>
+</div>
+        

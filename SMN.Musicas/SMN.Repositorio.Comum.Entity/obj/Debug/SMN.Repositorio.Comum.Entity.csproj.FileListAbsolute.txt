@@ -1,0 +1,12 @@
+C:\Users\Paulo\documents\visual studio 2015\Projects\SMN.Musicas\SMN.Repositorio.Comum.Entity\bin\Debug\SMN.Repositorio.Comum.Entity.dll.config
+C:\Users\Paulo\documents\visual studio 2015\Projects\SMN.Musicas\SMN.Repositorio.Comum.Entity\bin\Debug\SMN.Repositorio.Comum.Entity.dll
+C:\Users\Paulo\documents\visual studio 2015\Projects\SMN.Musicas\SMN.Repositorio.Comum.Entity\bin\Debug\SMN.Repositorio.Comum.Entity.pdb
+C:\Users\Paulo\documents\visual studio 2015\Projects\SMN.Musicas\SMN.Repositorio.Comum.Entity\bin\Debug\EntityFramework.dll
+C:\Users\Paulo\documents\visual studio 2015\Projects\SMN.Musicas\SMN.Repositorio.Comum.Entity\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Paulo\documents\visual studio 2015\Projects\SMN.Musicas\SMN.Repositorio.Comum.Entity\bin\Debug\SMN.Repositorio.Comum.dll
+C:\Users\Paulo\documents\visual studio 2015\Projects\SMN.Musicas\SMN.Repositorio.Comum.Entity\bin\Debug\SMN.Repositorio.Comum.pdb
+C:\Users\Paulo\documents\visual studio 2015\Projects\SMN.Musicas\SMN.Repositorio.Comum.Entity\bin\Debug\EntityFramework.xml
+C:\Users\Paulo\documents\visual studio 2015\Projects\SMN.Musicas\SMN.Repositorio.Comum.Entity\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Paulo\documents\visual studio 2015\Projects\SMN.Musicas\SMN.Repositorio.Comum.Entity\obj\Debug\SMN.Repositorio.Comum.Entity.csprojResolveAssemblyReference.cache
+C:\Users\Paulo\documents\visual studio 2015\Projects\SMN.Musicas\SMN.Repositorio.Comum.Entity\obj\Debug\SMN.Repositorio.Comum.Entity.dll
+C:\Users\Paulo\documents\visual studio 2015\Projects\SMN.Musicas\SMN.Repositorio.Comum.Entity\obj\Debug\SMN.Repositorio.Comum.Entity.pdb

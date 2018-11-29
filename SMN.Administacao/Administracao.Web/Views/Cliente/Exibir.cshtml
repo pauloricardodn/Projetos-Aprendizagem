@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Administracao.Web.ViewModel.Cliente.ClienteExibicaoViewModel>
+
+@{
+    ViewBag.Title = "Exibir";
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-lg-10 col-md-10 col-sm-10">
+        <label for="Nome">Pesquise Por Nome:</label>
+        <input type="text" id="pesquisaCliente" class="form-control " />
+    </div>
+</div>
+
+<p>
+    <button type="button" id="btn_Novo" class="btn btn-primary btn-md pull-right" onclick="cadastro()">Novo</button>
+</p>
+<table class="table" id="tabela_dados">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Endereco)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Celular)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sexo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cpf)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataNasc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataCad)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr id="linhaCliente">
+                <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td class="col-xs-2 col-sm-2 col-md-3 col-lg-2" id="nomeCliente">
+                    @Html.DisplayFor(modelItem => item.Endereco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Celular)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sexo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cpf)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataNasc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataCad)
+                </td>
+                <td class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <button type="button" id="btnEditar" class="btn btn-primary btn-md" onclick="editar('@item.IdCliente')">Editar</button>
+                    <button type="button" id="btn_Excluir" class="btn btn-danger btn-md" onclick="deletar('@item.IdCliente')">Excluir</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

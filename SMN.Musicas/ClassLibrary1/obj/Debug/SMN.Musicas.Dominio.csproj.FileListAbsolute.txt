@@ -1,0 +1,5 @@
+C:\Users\Paulo\documents\visual studio 2015\Projects\SMN.Musicas\ClassLibrary1\bin\Debug\SMN.Musicas.Dominio.dll
+C:\Users\Paulo\documents\visual studio 2015\Projects\SMN.Musicas\ClassLibrary1\bin\Debug\SMN.Musicas.Dominio.pdb
+C:\Users\Paulo\documents\visual studio 2015\Projects\SMN.Musicas\ClassLibrary1\obj\Debug\SMN.Musicas.Dominio.dll
+C:\Users\Paulo\documents\visual studio 2015\Projects\SMN.Musicas\ClassLibrary1\obj\Debug\SMN.Musicas.Dominio.pdb
+C:\Users\Paulo\documents\visual studio 2015\Projects\SMN.Musicas\ClassLibrary1\obj\Debug\SMN.Musicas.Dominio.csprojResolveAssemblyReference.cache

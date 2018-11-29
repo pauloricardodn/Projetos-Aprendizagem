@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Administracao.Web.ViewModel.Produto.ProdutoExibicaoViewModel>
+
+@{
+    ViewBag.Title = "Exibir";
+    Layout = null;
+}
+
+
+    <div class="row">
+        <div class="col-lg-10 col-md-10 col-sm-10">
+            <label for="Nome">Pesquise Por Nome:</label>
+            <input type="text" id="pesquisaProduto" class="form-control " />
+        </div>
+    </div>
+    <p>
+        <button type="button" id="btn_Novo" class="btn btn-primary btn-md pull-right" onclick="cadastro()">Novo</button>
+    </p>
+    <table class="table" id="tblExibir">
+        <tr>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.NomeProduto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QtdEstoque)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorCompra)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorVenda)
+            </th>
+            
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeProduto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QtdEstoque)
+            </td>
+            <td>
+                R$ @Html.DisplayFor(modelItem => item.ValorCompra)
+            </td>
+            <td>
+               R$ @Html.DisplayFor(modelItem => item.ValorVenda)
+            </td>
+            <td class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <button type="button" id="btnEditar" class="btn btn-primary btn-md" onclick="editar('@item.IdProduto')">Editar</button>
+                <button type="button" id="btn_Excluir" class="btn btn-danger btn-md" onclick="deletar('@item.IdProduto')">Excluir</button>
+            </td>
+        </tr>
+    }
+    
+    </table>

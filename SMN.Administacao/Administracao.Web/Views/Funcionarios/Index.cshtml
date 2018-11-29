@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Administracao.Web.ViewModel.Funcionarios.FuncionariosExibicaoViewModel>
+    @{
+        ViewBag.Title = "Index";
+    }
+
+    <div id="divDados">
+        @Html.Partial("Exibir", Model)
+    </div>
+    <div id="divCreate"style="display:none">
+         
+    </div>
+    <div id="divEdit"></div>
+
+@section Scripts{
+    <script type="text/javascript">
+        function editar(id) {
+            var url = '@Url.Action("Edit", "Funcionarios")';
+            $.get(url,
+            {
+                id: id
+            }).done(function (data) {
+                console.log(data);
+                $("#divDados").slideUp(200, function () {
+                    $("#divEdit").html(data).slideDown(200);
+                });
+            }).error(function () {
+                alert("erro");
+            });
+        };
+        function deletar(id) {
+            var url = '@Url.Action("Delete", "Funcionarios")';
+            if (confirm('Deseja Realmente Excluir o Funcionario ?')) {
+                $.get(url,
+                   {
+                       id: id
+                   }).done(function (data) {
+                       console.log(data);
+                       $("#divDados").slideUp(200, function () {
+                           $("#divDados").html(data).slideDown(200);
+                       });
+                   }).error(function () {
+                       alert("erro");
+                   });
+            }
+
+        };
+        function cadastro() {
+            var url = '@Url.Action("Create", "Funcionarios")';
+            $.get(url,null
+                ).done(function (data) {
+                    $("#divDados").slideUp(200, function () {
+                        $("#divCreate").html(data).slideDown(100);
+                    });
+                }).error(function () {
+                    alert("erro");
+                });
+        };
+        function cancelar() {
+            var url = '@Url.Action("Exibir", "Funcionarios")';
+            $.get(url, null
+                ).done(function (data) {
+                    $("#divCreate").slideUp(200, function () {
+                        $("#divDados").html(data).slideDown(100);
+                    });
+                }).error(function () {
+                    alert("erro");
+                });
+        };
+        function cancelarEditar() {
+            var url = '@Url.Action("Exibir", "Funcionarios")';
+            $.get(url, null
+                ).done(function (data) {
+                    $("#divEdit").slideUp(200, function () {
+                        $("#divDados").html(data).slideDown(100);
+                    });
+                }).error(function () {
+                    alert("erro");
+                });
+        };
+        $('#pesquisaFuncionario').on('keyup', function () {
+            var nome = $(this).val().toLowerCase();
+            $('#tabela_dados').find('tr').each(function () {
+                var conteudoCelula = $(this).find('td:first').text();
+                var corresponde = conteudoCelula.toLowerCase().indexOf(nome) >= 0;
+                $(this).css('display', corresponde ? '' : 'none');
+            });
+        });
+
+
+
+
+    </script>
+}
+

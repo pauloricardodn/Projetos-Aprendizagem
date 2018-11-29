@@ -1,0 +1,56 @@
+--istar o nome da marca e o nome de todos os seus produtos separados por ","
+
+Declare @var varchar(max)
+
+SELECT  @var = Isnull(@var,'') + ',' + PRODUTO_NOME
+
+FROM (SELECT CONVERT(varchar(max), PROD.PROD_NOME)AS PRODUTO_NOME
+
+FROM PRODUTO PROD
+INNER JOIN MARCA_PRODUTO MPROD
+	ON PROD.MARCA_PROD_ID=MPROD.MARCA_PROD_ID
+GROUP BY MPROD.MARCA_PROD_ID, CONVERT(varchar(max), PROD.PROD_NOME))tbl
+
+FROM PRODUTO PROD
+INNER JOIN MARCA_PRODUTO MPROD
+	ON PROD.MARCA_PROD_ID=MPROD.MARCA_PROD_ID
+GROUP BY MPROD.MARCA_PROD_NOME
+
+
+
+Declare @var varchar(max)
+
+SELECT    @var = Isnull(@var,'') + ',' + PRODUTO_NOME 
+
+FROM (SELECT CONVERT(varchar(max), PROD.PROD_NOME)AS PRODUTO_NOME
+
+FROM PRODUTO PROD
+INNER JOIN MARCA_PRODUTO MPROD
+	ON PROD.MARCA_PROD_ID=MPROD.MARCA_PROD_ID
+GROUP BY MPROD.MARCA_PROD_ID, CONVERT(varchar(max), PROD.PROD_NOME))LL
+
+
+
+
+
+
+
+SELECT MPROD.MARCA_PROD_NOME, prod.PROD_NOME
+
+replace(
+replace(
+ (select prod.prod_id FROM @f As Fat WHERE NF.ID_NF = Fat.PRENF_NF FOR XML RAW),
+ '<row ID_FAT="',''),'"/>',',') As X
+
+FROM PRODUTO PROD
+INNER JOIN MARCA_PRODUTO MPROD
+	ON PROD.MARCA_PROD_ID=MPROD.MARCA_PROD_ID
+GROUP BY MPROD.MARCA_PROD_NOME,  prod.PROD_NOME
+
+--
+select nf.ID_NF, nf.DATA_NF,
+replace(
+replace(
+ (select ID_FAT FROM @fat As Fat WHERE NF.ID_NF = Fat.PRENF_NF FOR XML RAW),
+ '<row ID_FAT="',''),'"/>',',') As X
+from @nf As NF

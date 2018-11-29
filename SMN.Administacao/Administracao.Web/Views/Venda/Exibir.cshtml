@@ -1,0 +1,102 @@
+﻿@model IEnumerable<Administracao.Web.ViewModel.Venda.VendaViewModel>
+
+@{
+   
+}
+
+
+<body>
+    <div id="divVenda">
+        <p>
+            <h1>Vendas</h1>
+        </p>
+        <table class="table table-striped">
+            <tr>
+
+                <th>
+                    Código
+                </th>
+                <th>
+                    Cliente
+                </th>
+                <th>
+                    Data da Venda
+                </th>
+                <th>
+                    Valor Total
+                </th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdVenda)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cliente.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataVenda)
+                    </td>
+                    <td>
+                        R$   @Html.DisplayFor(modelItem => item.ValorTotalVenda)
+                    </td>
+
+                    <td>
+                        <button type="button" class="btn btn-primary" onclick="detalhes('@item.IdVenda')">Detalhes </button>
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <div id="divDetalhes">
+    </div>
+    <div id="divEditar">
+    </div>
+   
+</body>
+@section Scripts{
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+    <script type="text/javascript">
+
+         function detalhes(id) {
+                    var url = '@Url.Action("Detalhes", "Venda")';
+                    $.get(url,
+                    {
+                        id: id
+                    }).done(function (data) {
+                        console.log(data);
+                        $("#divVenda").slideUp(200, function () {
+                            $("#divDetalhes").html(data).slideDown(200);
+                    });
+                    }).error(function () {
+                        alert("erro");
+                    });
+                    };
+
+ 
+
+
+         @*function editar(id) {
+                    var url = '@Url.Action("EditarVenda", "Venda")';
+                    $.get(url,
+                    {
+                        id: id
+                    }).done(function (data) {
+                        console.log(data);
+                        $("#divDetalhes").slideUp(200, function () {
+                            $("#divEditar").html(data).slideDown(200);
+                    });
+                    }).error(function () {
+                        alert("erro");
+                    });
+         };*@
+        
+
+    </script>
+
+}

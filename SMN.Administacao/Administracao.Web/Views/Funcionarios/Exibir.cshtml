@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Administracao.Web.ViewModel.Funcionarios.FuncionariosExibicaoViewModel>
+@{
+    ViewBag.Title = "Exibir";
+    Layout = null;
+}
+
+<h2>Funcionario</h2>
+<br />
+<div class="row" id="divExibir">
+    <div class="row col-md-10 ">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <label for="Nome" class="col-md-3">Pesquise Por Nome:</label>
+            <input type="text" id="pesquisaFuncionario" class="form-control col-md-7 " />
+        </div>
+    </div>
+    <p>
+        <button type="button" id="btn_Novo" class="btn btn-primary btn-md pull-right" onclick="cadastro()">Novo</button>
+    </p>
+    <table class="table" id="tabela_dados">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Endereco)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sexo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataNasc)
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Endereco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sexo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataNasc)
+                </td>
+                <td class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <button type="button" id="btnEditar" class="btn btn-primary btn-md" onclick="editar('@item.IdFuncionario')">Editar</button>
+                    <button type="button" id="btn_Excluir" class="btn btn-danger btn-md" onclick="deletar('@item.IdFuncionario')">Excluir</button>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+

@@ -1,0 +1,68 @@
+﻿@model SMN.Administracao.Dominio.Usuario
+@{
+    Layout = null;
+    
+ 
+
+    <title>Administração </title>
+
+
+
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="../vendors/animate.css/animate.min.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <body class="login">
+                <div class="login_wrapper">
+                    <div class="animate form login_form">
+                        <section class="login_content">                         
+                           
+                                <h1>Login</h1>
+                                
+                                    <div>
+                                        @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control", required = "required", placeholder = "Usuario" } })
+                                        @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
+                                        @Html.ValidationMessage("Erro");
+
+                                    </div>
+                                
+                                
+                                    <div>
+                                        @Html.EditorFor(model => model.Senha, new { htmlAttributes = new { @class = "form-control", required = "required", type = "Password", placeholder = "Senha" } })
+                                        @Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
+                                    </div>
+                              
+                                    <br />
+                                
+                                    <div>
+                                        <button class="btn btn-dark submit btn-ld" value="Create" type="submit">Logar</button>
+                                    </div>                 
+                                    <div class="clearfix"></div>
+                                        <div class="separator">
+
+                                        <div class="clearfix"></div>
+                              
+                                        <div>
+                                            <h1> Administração</h1>
+                                        </div>
+                                    </div>
+                        </section>
+                    </div>
+                </div>
+    </body> 
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+
+}

@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Administracao.Web.ViewModel.Cliente.ClienteExibicaoViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Clientes</h2>
+
+
+<div id="divDados">
+    @Html.Partial("Exibir", Model)
+</div>
+<div id="divCreate"></div>
+<div id="divEdit"></div>
+
+
+@section Scripts{
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+    <script type="text/javascript">
+        function cadastro() {
+            var url = '@Url.Action("Create", "Cliente")';
+            $.get(url,null
+                ).done(function (data) {
+                    $("#divDados").slideUp(200, function () {
+                        $("#divCreate").html(data).slideDown(100);
+                    });
+                }).error(function () {
+                    alert("erro");
+                });
+        };
+        function editar(id) {
+            var url = '@Url.Action("Edit", "Cliente")';
+            $.get(url,
+            {
+                id: id
+            }).done(function (data) {
+                console.log(data);
+                $("#divDados").slideUp(200, function () {
+                    $("#divEdit").html(data).slideDown(200);
+                });
+            }).error(function () {
+                alert("erro");
+            });
+        };
+        function cancelar() {
+            var url = '@Url.Action("Exibir", "Cliente")';
+            $.get(url, null
+                ).done(function (data) {
+                    $("#divCreate").slideUp(200, function () {
+                        $("#divDados").html(data).slideDown(100);
+                    });
+                }).error(function () {
+                    alert("erro");
+                });
+        };
+
+
+
+        function cancelarEditar() {
+            var url = '@Url.Action("Exibir", "Cliente")';
+            $.get(url, null
+                ).done(function (data) {
+                    $("#divEdit").slideUp(200, function () {
+                        $("#divDados").html(data).slideDown(100);
+                    });
+                }).error(function () {
+                    alert("erro");
+                });
+        };
+        function deletar(id) {
+            var url = '@Url.Action("Delete", "Cliente")';
+            if (confirm('Deseja Realmente Excluir o Cliente?')) {
+                $.get(url,
+                   {
+                       id: id
+                   }).done(function (data) {
+                       console.log(data);
+                       $("#divDados").slideUp(200, function () {
+                           $("#divDados").html(data).slideDown(200);
+                       });
+                   }).error(function () {
+                       alert("erro");
+                   });
+            }
+
+        };
+
+        $(document).ready(function () {
+            var $seuCampoCpf = $("#CPF");
+            $seuCampoCpf.mask('000.000.000-00', { reverse: false });
+            var $celular = $("#celular");
+            $celular.mask('(00)00000-0000', { reverse: false });
+            
+
+        });
+        //function salvar () {
+        //    var $seuCampoCpf = $("#CPF");
+        //    $seuCampoCpf.unmask();
+        //    var $celular = $("#celular");
+        //    $celular.unmask();
+
+        //}
+        $("#pesquisaCliente").on('keyup', function () {
+            var nome = $(this).val().toLowerCase();
+            $("#tabela_dados").find('tbody tr').each(function () {
+                var conteudoCelula = $(this).find('td:first').text();
+                var corresponde = conteudoCelula.toLowerCase().indexOf(nome) >= 0;
+                $(this).css('display', corresponde ? '' : 'none');
+            });
+        });
+        
+       
+              
+
+    </script>
+}

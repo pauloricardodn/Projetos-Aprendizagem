@@ -1,0 +1,177 @@
+﻿@model Administracao.Web.ViewModel.Venda.VendaViewModel
+@{
+    Layout = null;
+}
+@using (Html.BeginForm())
+{
+
+    <div class="row">
+        <div class="form-group col-md-12">
+            @Html.LabelFor(model => model.IdCliente, htmlAttributes: new { @class = "control-label col-md-1" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.IdCliente, Model.ClienteVenda, new { @class = "form-control ", id = "DDCliente", Required = "required", @readonly = "readonly", disabled = "disabled" })
+
+                @*@Html.DropDownListFor(model => model.IdCliente, Model.ClienteVenda, "Selecione", new { @class = "chzn-select search-dropdown chosen-select", data_placeholder = "Selecione", style = "width:400px" })*@
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdProduto, htmlAttributes: new { @class = "control-label col-md-1 " })
+            <div class="col-md-4">
+                @Html.DropDownList("Id", Model.ProdutoVenda, "Selecione", new { @class = "form-control ", id = "DDProduto", Required = "required" })
+                @Html.ValidationMessageFor(model => model.IdCliente, "", new { @class = "text-danger" })
+            </div>
+            <label class="col-md-1"> Preço: </label>
+            <input type="text" value="0,00" readonly="readonly" class="col-md-1 col-lg-1" id="valorProduto">
+            <label class="col-md-1"> Qtd: </label>
+            <div class="col-md-2">
+                <input type="number" value="1" id="quantidade" class="form-control col-md-9" required min="1" />
+            </div>
+            <button class="btn btn-primary" type="button" onclick="addProduto()">Adicionar</button>
+        </div>
+    </div>
+
+    <div id="itens venda">
+        <h3>Itens da Venda</h3>
+        <table class="table table-striped" id="itensVenda">
+            <tr class="titulo">
+                <th>Item Venda</th>
+                <th>Produto</th>
+                <th>Nome</th>
+                <th>Quantidade</th>
+                <th>Valor Uni</th>
+                <th>Valor Total</th>
+            </tr>
+            @foreach (var item in Model.VendaItem)
+            {
+                <tr>
+                    <td id='idVendaItem'>
+                        @item.IdVendaItem
+                    </td>
+                    <td id="tdIdProduto">
+                        @item.Produto.IdProduto
+                    </td>
+                    <td>
+                        @item.Produto.NomeProduto
+                    </td>
+                    <td id='tdQuantidade'>
+                        @item.Qtd
+                    </td>
+                    <td id='tdValorUnit'>
+                        @item.ValorUnitario
+                    </td>
+                    <td id='totalItem'>
+                        @item.ValorTotalItem
+                    </td>
+                    <td>
+                        <button class='btn btn-danger' type='button' onclick='removeLinha(this)'>Remover</button>
+                    </td>
+                </tr>
+            }
+        </table>
+        <div row>
+            <label class="col-md-3"> Valor Total da Venda: </label>
+            <input type="text" value="@Model.ValorTotalVenda" readonly="readonly" class="form-control col-md-2" id="totalVenda">
+        </div>
+        <br />
+    </div>
+    <div class="row col-md-12 ">
+        <div class="col-md-offset-2 col-md-10 ">
+            <button type="button" class="btn btn-default pull-right" href='@Url.Action("Index", "Home")'>Cancelar</button>
+            <input type="button" value="Finalizar Compra" class="btn btn-success pull-right" onclick="vendaEditar('@Model.IdVenda')" />
+        </div>
+
+    </div>
+}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+<script language="javascript">
+    var ListaItemDel= [];
+
+    $(document).ready(function () {
+        $("#DDProduto").change(function () {
+            var termoPerquisa = $("#DDProduto").val();
+            console.log("Entrou");
+            $.ajax({
+                method: "GET",
+                url: "/Produto/BuscarProdutoId?id=" + termoPerquisa,
+                success: function (data) {
+                    $("#valorProduto").val(data.ValorVenda).toFixed(2);
+                },
+                error: function (data) {
+                    alert("Um erro foi ocorrido");
+                }
+            });
+        });
+    });
+    $(document).ready(function () {
+        $("#valorProduto").mask("00,00");
+
+    });
+
+    function addProduto() {
+        $("#itensVenda tbody").append(
+                            "<tr >" +
+                            " <td id='idVendaItem'>" + 0 + "</td>" +
+                            " <td id='tdIdProduto'>" + $("#DDProduto option:selected").val() + "</td>" +
+                            " <td class='itemVenda(2)'>" + $("#DDProduto option:selected").text() + "</td>" +
+                            " <td id='tdQuantidade'>" + $("#quantidade").val() + "</td>" +
+                            " <td id='tdValorUnit'>" + (parseFloat($("#valorProduto").val())).toFixed(2) + "</td>" +
+                            " <td id='totalItem'>" + ($("#quantidade").val() * $("#valorProduto").val()).toFixed(2) + "</td>" +
+                            " <td>" + "<button class='btn btn-danger'type='button' onclick='removeLinha(this)'>Remover</button>" + "</td>" +
+
+                            "</tr>"
+                        );
+        $("#totalVenda").val((parseFloat($("#totalVenda").val()) + (parseFloat($("#quantidade").val()) * parseFloat($("#valorProduto").val()))).toFixed(2));
+    };
+    function removeLinha(element) { // <-- changes
+        console.log("entrou");
+        var idVendaItem=parseFloat($(element).closest('tr').find("#idVendaItem").text());
+        if(idVendaItem!=0){
+            ListaItemDel.push({
+                IdVendaItem:idVendaItem
+            });
+        }
+
+        $("#totalVenda").val((parseFloat($("#totalVenda").val()) - parseFloat($(element).closest('tr').find("#totalItem").text())).toFixed(2));
+        $(element).closest('tr').remove();
+    };
+
+
+    function vendaEditar(idVenda) {
+        var model = {
+            IdCliente: $("#DDCliente").val(),
+            VendaItem: [],
+            IdVenda:idVenda,
+            ItemDeletar:ListaItemDel
+        }
+        
+
+        var table = $('#itensVenda');
+        table.find('tr:not(.titulo)').each(function () {
+            console.log($(this))
+
+            model.VendaItem.push({
+                IdVendaItem: $(this).find("#idVendaItem").text(),
+                IdProduto: $(this).find("#tdIdProduto").text(),
+                Qtd: parseFloat($(this).find("#tdQuantidade").text()).toFixed(2).replace('.', ','),
+                ValorUnitario: parseFloat($(this).find("#tdValorUnit").text()).toFixed(2).replace('.', ',')
+            });
+        });
+        console.log(model);
+
+        var url = '@Url.Action("EditarVenda", "Venda")';
+        $.post(url, model
+            ).done(function (data) {
+                $("#divEditar").slideUp(200, function () {
+                    $("#divVenda").html(data).slideDown(100);
+                });
+            }).error(function () {
+                alert("erro");
+            });
+    };
+
+</script>
+
